@@ -22,6 +22,10 @@ app.get('/api/projects/web', getWebProject);
 app.get('/api/projects/app', getAppProject);
 app.get('/api/projects/graphic', getGraphicProject);
 
+app.get('/', (req, res) => {
+  res.send('Hello to my API');
+});
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, async () => {
