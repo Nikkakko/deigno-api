@@ -26,10 +26,10 @@ app.get('/', (req, res) => {
   res.send('Hello to my API');
 });
 
-app.listen(process.env.PORT || 8080, async () => {
+app.listen(process.env.PORT || 8088, async () => {
   try {
     connect();
-    console.log(`Server running on port: ${PORT}`);
+    console.log(`Server running on port: 8080`);
   } catch (error) {
     console.log(error);
   }
