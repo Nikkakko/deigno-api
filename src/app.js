@@ -26,9 +26,7 @@ app.get('/', (req, res) => {
   res.send('Hello to my API');
 });
 
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, async () => {
+app.listen(process.env.PORT || 8080, async () => {
   try {
     connect();
     console.log(`Server running on port: ${PORT}`);
