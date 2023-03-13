@@ -50,7 +50,11 @@ export const validateForm = async (req, res) => {
   try {
     const value = await schema.validateAsync({ name, email, phone, message });
 
-    res.status(200).json({ message: 'Form submitted successfully' });
+    if (!value) {
+      res.status(400).json({ message: 'Please fill in all fields' });
+    } else {
+      res.status(200).json({ message: 'Form submitted successfully' });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
