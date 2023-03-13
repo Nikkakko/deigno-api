@@ -8,6 +8,7 @@ import {
   getAppProject,
   getGraphicProject,
   getWebProject,
+  validateForm,
 } from './controllers/project.js';
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.get('/api/projects', getAllProject);
 app.get('/api/projects/web', getWebProject);
 app.get('/api/projects/app', getAppProject);
 app.get('/api/projects/graphic', getGraphicProject);
+app.post('/api/submit-form', validateForm);
 
 app.get('/', (req, res) => {
   res.send('Hello to my API');

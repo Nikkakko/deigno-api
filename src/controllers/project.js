@@ -1,4 +1,5 @@
 import Project from '../models/Project.js';
+import joi from 'joi';
 
 export const getAllProject = async (req, res) => {
   try {
@@ -33,5 +34,24 @@ export const getGraphicProject = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+};
+
+const Joi = joi;
+const schema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().required(),
+  message: Joi.string().required(),
+});
+
+export const validateForm = async (req, res) => {
+  const { name, email, phone, message } = req.body;
+  try {
+    const value = await schema.validateAsync({ name, email, phone, message });
+
+    res.status(200).json({ message: 'Form submitted successfully' });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
