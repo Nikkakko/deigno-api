@@ -56,7 +56,11 @@ const schema = Joi.object({
   message: Joi.string().required().messages({
     'string.empty': '{#label} field is required',
   }),
-});
+})
+  .or('name', 'email', 'phone', 'message')
+  .messages({
+    'object.missing': 'Please fill in all fields',
+  });
 
 export const validateForm = async (req, res) => {
   const { name, email, phone, message } = req.body;
