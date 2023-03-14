@@ -39,12 +39,18 @@ export const getGraphicProject = async (req, res) => {
 
 const Joi = joi;
 const schema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().email().required(),
+  name: Joi.string().required().label('Name'),
+  email: Joi.string().email().required().label('Email'),
   phone: Joi.string()
     .pattern(/^[0-9]{10}$/)
-    .required(),
-  message: Joi.string().required(),
+    .required()
+    .label('Phone'),
+  message: Joi.string().required().label('Message'),
+}).messages({
+  'string.base': '{#label} must be a string',
+  'string.empty': '{#label} is required',
+  'string.email': '{#label} must be a valid email',
+  'string.pattern.base': '{#label} must be a 10-digit phone number',
 });
 
 export const validateForm = async (req, res) => {
