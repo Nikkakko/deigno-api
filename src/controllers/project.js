@@ -73,6 +73,10 @@ export const validateForm = async (req, res) => {
       res.status(200).json({ message: 'Form submitted successfully' });
     }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    const errors = {};
+    error.details.forEach(detail => {
+      errors[detail.context.key] = detail.message;
+    });
+    res.status(400).json({ errors });
   }
 };
