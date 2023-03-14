@@ -39,18 +39,23 @@ export const getGraphicProject = async (req, res) => {
 
 const Joi = joi;
 const schema = Joi.object({
-  name: Joi.string().required().label('Name'),
-  email: Joi.string().email().required().label('Email'),
+  name: Joi.string().required().messages({
+    'string.empty': '{#label} field is required',
+  }),
+  email: Joi.string().email().required().messages({
+    'string.email': 'Please enter a valid email address for {#label}',
+    'string.empty': '{#label} field is required',
+  }),
   phone: Joi.string()
     .pattern(/^[0-9]{10}$/)
     .required()
-    .label('Phone'),
-  message: Joi.string().required().label('Message'),
-}).messages({
-  'string.base': '{#label} must be a string',
-  'string.empty': '{#label} is required',
-  'string.email': '{#label} must be a valid email',
-  'string.pattern.base': '{#label} must be a 10-digit phone number',
+    .messages({
+      'string.pattern.base': '{#label} must be a 10-digit phone number',
+      'string.empty': '{#label} field is required',
+    }),
+  message: Joi.string().required().messages({
+    'string.empty': '{#label} field is required',
+  }),
 });
 
 export const validateForm = async (req, res) => {
